@@ -1,0 +1,45 @@
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+<header class = "navbar navbar-inverse navbar-fixed-top" role = "banner">
+<div class = "container">
+    <div class ="navbar-header">
+        <button type = "button" class= "navbar-toggle" data-toggle = "collapse" data-target = "#dropdown">
+            <span class = "sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+
+        <a href="#" class ="navbar-brand">Project Name</a>
+    </div><!-- End Navbar Header-->
+
+    <div class = "collapse navbar-collapse" id = "dropdown">
+
+        <ul class = "nav navbar-nav navbar-right" role = "navigation">
+            <li><a href="/tracker/open">Open Issues</a></li>
+            <li><a href="/tracker/closed">Closed Issues</a></li>
+            <li><a href="/tracker/collection">Script Collection</a></li>
+            <li><a href="/tracker/submit">Submit an Issue</a></li>
+        </ul>
+
+    </div><!-- End Nav Contents -->
+</div><!-- End Container -->
+</header>
+
+{# Display a form #}
+<form action="/url/to/submit/" method="post" class="form">
+  {% csrf_token %}
+  {% buttons %}
+    <button type="submit" class="btn btn-primary">
+      {% bootstrap_icon "star" %} Submit
+    </button>
+  {% endbuttons %}
+</form>
