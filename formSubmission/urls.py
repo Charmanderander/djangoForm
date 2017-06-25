@@ -17,6 +17,6 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^tracker/', include('issueSubmitter.urls')),
+    url(r'', include('issueSubmitter.urls')),
     url(r'^admin/', admin.site.urls),
 ]
