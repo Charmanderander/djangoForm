@@ -2,8 +2,6 @@ from django.conf.urls import url
 
 from . import views
 
-patterns = ['open/','closed/','collection/','submit/']
-
 urlpatterns = [
     url(r'^open/', views.open, name='open'),
     url(r'^closed/', views.closed, name='closed'),
