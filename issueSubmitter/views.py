@@ -4,10 +4,14 @@ from django.template import RequestContext
 from django.shortcuts import render
 from .forms import NameForm
 from django.http import HttpResponse
+from .models import *
 # Create your views here.
 
 def open(request):
-    my_data_dictionary = {}
+    #openIssues = OpenIssues(user='Jinhao', title='Test title', description='Test description', files='CSV', tags='tags and stuff')
+    #openIssues.save()
+    openIssues = OpenIssues.objects.all()
+    my_data_dictionary = {'issues':openIssues}
     return render(request, 'open.html', my_data_dictionary)
 
 def closed(request):

@@ -12,4 +12,10 @@ Look at the sketch for more details
 
 1) Pull the project
 2) pip install -r requirements.txt
-3) python manage.py runserver
+4) python manage.py runserver
+
+# External Software Dependencies
+
+1) Install postgresql DB
+    - Change the user name and password of your database in settings.py
+    - Remember to run "python manage.py makemigrations / migrations" !
