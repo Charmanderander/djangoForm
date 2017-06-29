@@ -19,9 +19,12 @@ class ClosedIssues(models.Model):
     description = models.CharField(max_length=50)
     files = models.CharField(max_length=100)
     tags = models.CharField(max_length=50)
+    code = models.CharField(max_length=50)
+    explanation = models.CharField(max_length=50)
 
 class ScriptCollection(models.Model):
     code = models.CharField(max_length=50)
+    explanation = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=50)
     files = models.CharField(max_length=100)

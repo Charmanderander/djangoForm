@@ -2,26 +2,63 @@
 from __future__ import unicode_literals
 from django.template import RequestContext
 from django.shortcuts import render
-from .forms import NameForm
+from .forms import *
 from django.http import HttpResponseRedirect
 from .models import *
 # Create your views here.
 
-def open(request):
-    #openIssues = OpenIssues(user='Jinhao', title='Test title', description='Test description', files='CSV', tags='tags and stuff')
-    #openIssues.save()
+def solve(request):
+    issueID = request.GET.get("id", False)
+    issue = OpenIssues.objects.filter(id=issueID)
+
+    if 'id' not in request.session:
+         request.session['id'] = issueID
+
+    if request.method == 'POST' and issueID==False:
+        # create a form instance and populate it with data from the request:
+        form = SolveForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            print "writing to db..."
+
+            issue = OpenIssues.objects.filter(id=request.session['id'])
+
+            closedIssues = ClosedIssues(user=issue[0].user, title=issue[0].title, \
+                 description=issue[0].description, files=issue[0].files, tags=issue[0].tags, \
+                 code=form.cleaned_data['code'], explanation=form.cleaned_data['explanation'])
+
+            closedIssues.save()
+            issue.delete()
+            return HttpResponseRedirect('/closed')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = SolveForm()
+
+    my_data_dictionary = {'form':form,'issue':issue[0],'admin': True}
+    return render(request, 'solve.html', my_data_dictionary)
+
+def adminView(request):
     openIssues = OpenIssues.objects.all()
-    my_data_dictionary = {'openIssues':openIssues}
+    my_data_dictionary = {'openIssues':openIssues,'admin': True}
+    return render(request, 'open.html', my_data_dictionary)
+
+def open(request):
+    openIssues = OpenIssues.objects.all()
+    my_data_dictionary = {'openIssues':openIssues, 'admin': False}
     return render(request, 'open.html', my_data_dictionary)
 
 def closed(request):
     closedIssues = ClosedIssues.objects.all()
-    my_data_dictionary = {'closedIssues':closedIssues}
+    my_data_dictionary = {'closedIssues':closedIssues, 'admin': False}
     return render(request, 'closed.html', my_data_dictionary)
 
 def collection(request):
     collection = ScriptCollection.objects.all()
-    my_data_dictionary = {'collection':collection}
+    my_data_dictionary = {'collection':collection, 'admin': False}
     return render(request, 'collection.html', my_data_dictionary)
 
 def submit(request):
@@ -42,5 +79,5 @@ def submit(request):
     # if a GET (or any other method) we'll create a blank form
     else:
         form = NameForm()
-
-    return render(request, 'submit.html', {'form': form})
+    my_data_dictionary = {'form': form, 'admin': 'no'}
+    return render(request, 'submit.html', my_data_dictionary)

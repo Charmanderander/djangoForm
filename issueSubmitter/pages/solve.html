@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
+<div class = "container">
+  <h1>Solve issue</h1>
+
+  <hr/>
+
+  <div class="list-group">
+
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{issue.title}}</h5>
+        <small>{{issue.user}}</small>
+        <br/>
+        <small>{{issue.date}}</small>
+      </div>
+
+      <hr/>
+      <p class="mb-1">{{issue.description}}</p>
+      <hr/>
+      <p><small>Files invovled: {{issue.files}}</small><p>
+        <p><small># {{issue.tags}}</small></p>
+      </a>
+    </div>
+    <br/>
+
+  <form action="/solve/" method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% bootstrap_button "Submit" button_type="submit" button_class="btn-primary" %}
+</form>
+  </div>
+{% endblock %}

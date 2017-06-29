@@ -1,31 +1,40 @@
 {% extends "index.html" %}
+{% load bootstrap3 %}
 
 {% block content %}
 <div class = "container">
-        <h1>Open Issues</h1>
+  <h1>Open Issues</h1>
 
-        <hr/>
+  <hr/>
 
-        <div class="list-group">
+  <div class="list-group">
 
-          {% for item in openIssues %}
-          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-            <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1">{{item.title}}</h5>
-              <small>{{item.user}}</small>
-              <br/>
-              <small>{{item.date}}</small>
-            </div>
-            <hr/>
-            <p class="mb-1">{{item.description}}</p>
-            <hr/>
-            <p><small>Files invovled: {{item.files}}</small><p>
-            <p><small># {{item.tags}}</small></p>
-          </a>
-          <br/>
-          {% endfor %}
+    {% for item in openIssues %}
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
 
-        </div>
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{item.title}}</h5>
+        <small>{{item.user}}</small>
+        <br/>
+        <small>{{item.date}}</small>
+      </div>
 
-</div>
-{% endblock %}
+      <hr/>
+      <p class="mb-1">{{item.description}}</p>
+      <hr/>
+      <p><small>Files invovled: {{item.files}}</small><p>
+        <p><small># {{item.tags}}</small></p>
+        {% if admin %}
+        <form action="/solve/?id={{item.id}}" method="POST">
+          {% csrf_token %}
+          {% bootstrap_button "Solve this issue" button_type="submit" button_class="btn-primary" %}
+        </form>
+        {% endif %}
+      </a>
+      <br/>
+      {% endfor %}
+
+    </div>
+
+  </div>
+  {% endblock %}
