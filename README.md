@@ -15,7 +15,7 @@ Look at the sketch for more details
 3) Ensure Postgres Database is running
   - You can change the ports under settings.py
 4) python manage.py makemigrations / migrate (if needed)
-4) python manage.py runserver
+5) python manage.py runserver
 
 # External Software Dependencies
 
