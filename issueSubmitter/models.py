@@ -10,6 +10,7 @@ class OpenIssues(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=50)
     files = models.CharField(max_length=100)
+    date = models.DateTimeField(auto_now_add=True, blank=True)
     tags = models.CharField(max_length=50)
 
 class ClosedIssues(models.Model):
@@ -19,16 +20,8 @@ class ClosedIssues(models.Model):
     files = models.CharField(max_length=100)
     tags = models.CharField(max_length=50)
 
-
 class ScriptCollection(models.Model):
     code = models.CharField(max_length=50)
-    title = models.CharField(max_length=50)
-    description = models.CharField(max_length=50)
-    files = models.CharField(max_length=100)
-    tags = models.CharField(max_length=50)
-
-class SubmittedQueries(models.Model):
-    user = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=50)
     files = models.CharField(max_length=100)

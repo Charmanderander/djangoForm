@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class = "container">
-  <form action="/#" method="post">
+  <form action="/submit/" method="post">
     {% csrf_token %}
     {% bootstrap_form form %}
     {% bootstrap_button "Submit" button_type="submit" button_class="btn-primary" %}

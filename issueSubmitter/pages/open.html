@@ -8,19 +8,22 @@
 
         <div class="list-group">
 
-          {% for item in issues %}
-          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+          {% for item in openIssues %}
+          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">{{item.title}}</h5>
               <small>{{item.user}}</small>
+              <br/>
+              <small>{{item.date}}</small>
             </div>
+            <hr/>
             <p class="mb-1">{{item.description}}</p>
+            <hr/>
             <p><small>Files invovled: {{item.files}}</small><p>
-            <small># {{item.tags}}</small>
+            <p><small># {{item.tags}}</small></p>
           </a>
+          <br/>
           {% endfor %}
-
-
 
         </div>
 
